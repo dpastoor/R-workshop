@@ -10,6 +10,8 @@
 \trainermanualtrue
 
 \usepackage{url}
+\usepackage[paper=a4paper,top=35mm,left=25mm,right=25mm,bottom=30mm]{geometry}
+
 % Set some Workshop specific info
 \iftrainermanual
 \title{TRAINER MANUAL for R and rqtl workshop}
@@ -17,7 +19,7 @@
 \title{Introductory workshop for R and rqtl}
 \fi
 \date{May 2014}
-\author{Angus Wallace}
+\author{Angus Wallace and Julian Taylor}
 
 
 
@@ -41,7 +43,10 @@
 %				     BSTINPUTS=getwd())
 %		knit2pdf("~/R_workshop_handout/workshop_handout.Rnw", output=paste(DATADIR,"/pdfs/R_workshop_handout.tex",sep=""))
 
-<<setup, echo=FALSE, include=FALSE, cache=FALSE, tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+\setlength{\parskip}{2ex}
+
+<<setup, echo=FALSE, include=FALSE, cache=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
+opts_chunk$set(tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width=75))
 CODEDIR <- Sys.getenv("CODEDIR")
 DATADIR <- Sys.getenv("DATADIR")
 library(xtable)
@@ -78,7 +83,7 @@ Each section in this workshop introduces a new concept or tool. Each section con
 
 \subsection{Code}
 To use R, one must write code. This document contains code for different purposes, and it is formatted in a characteristic and consistent way throughout.
-<<code_eg, eval=TRUE, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<code_eg, eval=TRUE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 # boxes like this contain example code
 
 # comments start with a hash 
@@ -91,21 +96,21 @@ print("this line has no hash at the start, so is run")
 @
 
 \subsubsection{Write some code! (aka problems)}
-<<ex_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<ex_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # You should attempt to acheive all problems in green
 @
 
-<<ex_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>= 
+<<ex_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
 # If you are progressing well, attempt problems in orange also (as an extension)
 @
 
-<<ex_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<ex_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # Problems in Purple are designed to be difficult. These are problems you might want to think about later.
 @
 
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<ex_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<ex_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
 # Trainer solutions to the problems are included in (uncoloured) plaintext
 @
 \fi
@@ -115,7 +120,7 @@ print("this line has no hash at the start, so is run")
 \subsection{Arithmetic}
 One can use R just like a calculator, to do basic arithmetic:
 
-<<arithmetic, eval=TRUE, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<arithmetic, eval=TRUE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 1+1
 2*4
 3^4
@@ -135,7 +140,7 @@ It is possible to write functions for commonly performed activities, and this is
 So, libraries/packages contain collections of functions, which are what get things done. When one first opens R, the \textit{base} library is automatically loaded, and provides the fundamental functions. \\
 The following code shows the installation and loading of a library
 
-<<libraries, eval=TRUE, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<libraries, eval=TRUE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 # install a package
 install.packages("ggplot2")
 # load the package
@@ -158,7 +163,7 @@ I generally use Google, but be warned -- because its name is so short, "R" is a 
 R has different ways of storing data, that are appropriate for different uses.
 \subsection{The vector type}
 
-<<vector, eval=TRUE, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<vector, eval=TRUE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 # a is a numeric vector
 a <- c(1,2,3,4,5)
 a
@@ -194,7 +199,7 @@ as.numeric(a) + 1
 
 %%% PROBLEMS
 \subsubsection{Write some code!}
-<<vector_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<vector_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # 1. Create a vector of length 5, containing any integers you like
 
 # 2. get the 3rd element and store it in another vector
@@ -202,7 +207,7 @@ as.numeric(a) + 1
 # 3. get all the elements except the 3rd, and store them in another vector
 @
 
-<<vector_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>= 
+<<vector_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
 # 4. take the vectors created in steps 2. and 3. and combine them into a new vector 
 
 # 5. take the vector created in 1., and create a new vector that is the same except that the 2nd and 4th values are replaced with -99
@@ -214,7 +219,7 @@ as.numeric(a) + 1
 # 7b. use the vector created in 5., find the sum of its elements, except the -99s, squared 
 @
 
-<<vector_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<vector_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # 8. read the help for the function "seq", and use it to create a vector containing the values 0 to 99 in increments of three (eg 0, 3, 6, 9....)
 
 # 9. from the vector created in step 8., make a vector containing all the values that are multiples of two
@@ -224,7 +229,7 @@ as.numeric(a) + 1
 %%% SOLUTIONS
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<vector_soln, eval=FALSE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<vector_soln, eval=FALSE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
 # Trainer solutions to the problems are included in plaintext
 # 1 
 a <- c(1, 2, 3, 4, 5)
@@ -263,7 +268,7 @@ g <- f[f %% 2 == 0]
 \subsection{The list type}
 Vectors must be all one \textit{type} of data -- eg. numeric, character, boolean. Lists do not have this restriction, and can mix types of data
 
-<<list, eval=TRUE, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<list, eval=TRUE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 my_list <- list("I", "have", 10, "cars")
 
 # one can even put a vector inside a list (a is the numeric vector from before)
@@ -279,22 +284,22 @@ my_list[[5]][1:2]
 %%% PROBLEMS
 \subsubsection{Write some code!}
 
-<<list_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<list_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # 1. 
 @
 
-<<list_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>= 
+<<list_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
 # 4. 
 @
 
-<<list_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<list_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # 
 @
 
 %%% SOLUTIONS
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<list_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<list_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
 # Trainer solutions to the problems are included in plaintext
 @
 \fi
@@ -302,7 +307,7 @@ my_list[[5]][1:2]
 \subsection{The data.frame type}
 data.frames are great. They are ideal for storing and manipulating experimental data. Think of them as a spreadsheet, where columns can contain different types of data. Data can be sliced and diced in many ways, and it is easy to aggregate the data too.
 
-<<data_frame, eval=TRUE, fig.width=3, fig.height=3, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<data_frame, eval=TRUE, fig.width=3, fig.height=3, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 cultivar <- c("RAC","RAC","RAC","EXCAL","EXCAL","EXCAL","EXCAL")
 height   <- c( 0.6 ,0.57 ,0.62 , 0.92  , 0.77  , 0.55  , 0.76  )
 drought  <- c(FALSE,TRUE, TRUE , FALSE , TRUE  , TRUE  , FALSE )
@@ -337,7 +342,7 @@ ggplot(df, aes(cultivar, height)) + geom_point() + facet_wrap(~drought)
 
 %%% PROBLEMS
 \subsubsection{Write some code!}
-<<df_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<df_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # 1. there is a data.frame called mtcars -- look at it
 # Note: if you break the mtcars data somehow, you can reload/reset it by typing
 data(mtcars)
@@ -350,7 +355,7 @@ data(mtcars)
 
 @
 
-<<df_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>= 
+<<df_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
 # 5. create a scatterplot of mpg vs hp (hint: use the "plot" function)
 
 # 6. for each car, calculate the hp to cyl ratio (horse-power per cylinder: a very important quantity!), store it in a new column in the dataframe called "hp2cyl"
@@ -358,7 +363,7 @@ data(mtcars)
 # 7. It has been found that the cars' weight was overestimated by 5% for cars weighing more than 3.5 tons -- correct this
 @
 
-<<df_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<df_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # 8. install the "plyr" library, and repeat what you did in step 4 using the function ddply, a function in that library
 
 # 9. install the "ggplot2" library, and explore different visualisations of the data
@@ -367,7 +372,7 @@ data(mtcars)
 %%% SOLUTIONS
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<df_soln, eval=FALSE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<df_soln, eval=FALSE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
 # 1. there is a data.frame called mtcars -- look at it
 mtcars
 
@@ -421,7 +426,7 @@ sample, cultivar, height, tillers, grain, group\\
 3,      RAC,      3.25,   5,       4,     control\\
 4,      EXCAL,    3.25,   5,       4,     control}
 Then you would read it in with the command:
-<<csv_read_1, eval=FALSE, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<csv_read_1, eval=FALSE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 my.data.frame <- read.table(filename, header=TRUE, sep=",", 
                             stringsAsFactors=FALSE)
 @
@@ -436,7 +441,7 @@ Alternatively, if the csv file looked like this:\\
 4       "EXCAL"     3.25    5        4      "control"\\
 }\\
 Then you would read it in with the command:
-<<csv_2, eval=FALSE, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<csv_2, eval=FALSE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 my.data.frame <- read.table(filename, header=TRUE, sep=" ", quote="\"", stringsAsFactors=FALSE)
 @
 
@@ -454,7 +459,7 @@ The idea here, is that we have a quote symbol within quotes. In other words, we 
 % plex_dat <- plex_dat[,-25]
 % write.table(plex_dat,file="~/R_workshop_handout/plex_dat.dat")
 
-<<readin_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<readin_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # There is a csv file that you can read. It is located at [SHOW LOCATION HERE]. 
 
 # 1. Open this file in RStudio, using [FILE -> Open File]
@@ -474,19 +479,19 @@ The idea here, is that we have a quote symbol within quotes. In other words, we 
 # 7. use read.cross to read in the qtl.dat file
 @
 
-<<readin_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>= 
+<<readin_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
 # 7. list and plot all the data for probe "Ta.10026.1.A1_at"
 
 # 8. create a histogram of the data in column "X2.WL711.susceptible.irrigated"
 @
 
-<<readin_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<readin_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
    
 @
 %%% SOLUTIONS
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<readin_soln, eval=FALSE, cache=TRUE, result='hide', background='#F9F9FF', highlight=FALSE, tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<readin_soln, eval=FALSE, cache=TRUE, result='hide', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
 # 1. 
 
 # 2. Read in the file, using read.table, to a new variable.
@@ -537,7 +542,7 @@ More information can be found by typing \texttt{?read.cross} in R.
 \subsection{Reading-in and interrogating qtl data}
 \texttt{read.cross} produces a complicated "object"\footnote{we have talked about several objects in this workshop: lists, vectors, data.frames. What we haven't talked about, and what is out-of-scope, is that it is possible to create custom objects. Normally, a custom object will consist of a list of other objects, or a list of lists of other objects, etc... This exploits the fact that different objects can be mixed within a list}. With a small object, \texttt{str} can be useful to understand its internal structure, but that is less useful here because this object is too large.
 
-<<qtl_1, eval=FALSE, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_1, eval=FALSE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 library(qtl)
 library(qtlPlus)
 
@@ -596,7 +601,7 @@ Note that when one types \texttt{exmap} (or whatever one has called the object) 
 
 %%% PROBLEMS
 \subsection{Write some code!}
-<<qtl_1_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_1_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # 1. Install and load the required function libraries
 
 
@@ -607,25 +612,25 @@ exmap <- read.cross(file = "qtl.dat", format = "csvr", genotypes = c("AA", "BB")
 
 @
 
-<<qtl_1_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>= 
+<<qtl_1_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
 
 @
 
-<<qtl_1_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_1_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # nothing
 @
 
 %%% SOLUTIONS
 \iftrainermanual
 \subsection{Trainer solutions}
-<<qtl_1_soln, eval=FALSE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_1_soln, eval=FALSE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
 # 1. Install and load the required function libraries
 install.packages("qtl")
 install.packages("qtlPlus")
 @
 
 \subsection{Subsetting qtl data}
-<<qtl_2, eval=FALSE, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_2, eval=FALSE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 # subsetting your data to linkage group to first three linkage groups
 # this can be done in multiple different ways
 names(exmap$geno)
@@ -682,33 +687,33 @@ nind(exmaps)
 
 %%% PROBLEMS
 \subsection{Write some code!}
-<<qtl_2_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_2_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # 1. Create a new map that contains only marker data for the 1* chromasomes.
 
 # 2. Create a new map that contains only individuals without any missing marker data
 
 @
 
-<<qtl_2_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>= 
+<<qtl_2_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
 
 # 2. Find any individuals possessing any markers that are not double haploid, and remove them from the object
 
 
 @
 
-<<qtl_2_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_2_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # 4. Find any individuals possessing a phenotype that is more than 4 standard deviations from the mean and, remove them. (useful functions: var, sqrt)
 @
 
 %%% SOLUTIONS
 \iftrainermanual
 \subsection{Trainer solutions}
-<<qtl_2_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_2_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
 # nothing
 @
 
 \subsection{Other interrogation, modification and subsetting tools}
-<<qtl_3, eval=FALSE, cache=TRUE, result='asis', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_3, eval=FALSE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
 # pull "map" component from each chromosome
 pm <- pull.map(exmap)
 pm
@@ -764,24 +769,24 @@ exmap$geno <- exmap$geno[mixedorder(names(exmap$geno))]
 
 %%% PROBLEMS
 \subsection{Write some code!}
-<<qtl_3_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_3_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
 #nothing
 @
 
-<<qtl_3_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>= 
+<<qtl_3_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
 
 # find any markers with missing data in 4 or more individuals and remove them
 
 @
 
-<<qtl_3_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_3_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
 # nothing
 @
 
 %%% SOLUTIONS
 \iftrainermanual
 \subsection{Trainer solutions}
-<<qtl_3_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width.cutoff=60)>>=
+<<qtl_3_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
 # nothing
 @
 
