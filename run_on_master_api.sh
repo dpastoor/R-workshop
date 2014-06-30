@@ -13,6 +13,10 @@ for this_serv in $servers; do
    nova add-secgroup ${this_serv} r_serv
 done
 
+for this_serv in $servers; do
+   nova delete ${this_serv}
+done
+
 
 
 # useful

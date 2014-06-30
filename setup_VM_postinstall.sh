@@ -64,12 +64,20 @@ Icon=/usr/lib/firefox/browser/icons/mozicon128.png
 Terminal=FALSE" > /home/${REMOTE_USER_USERNAME}/Desktop/firefox_abn_link.desktop
 chmod +x /home/${REMOTE_USER_USERNAME}/Desktop/firefox_abn_link.desktop
 
-# Since this script is run as root, any files created by it are owned by root:root.
-# Therefore, we'll ensure all files under /home/${REMOTE_USER_USERNAME} are owned
-# by the correct user:
-chown --recursive ${REMOTE_USER_USERNAME}:${REMOTE_USER_USERNAME} /home/${REMOTE_USER_USERNAME}/
+
 
 # alter the rstudio server so that it runs on port 80
 echo -e "\n# alter the rstudio server so that it runs on port 80\n" >> /etc/rstudio/rserver.conf
 echo -e "www-port=80\n" >> /etc/rstudio/rserver.conf
 rstudio-server restart
+
+# clone the workshop git repository so that the needed data are accessible
+cd /home/${REMOTE_USER_USERNAME}/
+git clone https://github.com/wall0159/R-workshop.git
+cp /home/${REMOTE_USER_USERNAME}/R-workshop/plex_dat* /home/${REMOTE_USER_USERNAME}/
+
+
+# Since this script is run as root, any files created by it are owned by root:root.
+# Therefore, we'll ensure all files under /home/${REMOTE_USER_USERNAME} are owned
+# by the correct user:
+chown --recursive ${REMOTE_USER_USERNAME}:${REMOTE_USER_USERNAME} /home/${REMOTE_USER_USERNAME}/

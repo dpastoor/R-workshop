@@ -45,8 +45,8 @@
 
 \setlength{\parskip}{2ex}
 
-<<setup, echo=FALSE, include=FALSE, cache=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
-opts_chunk$set(tidy=TRUE, tidy.opts=list(keep.blank.line=FALSE, width=75))
+<<setup, echo=FALSE, include=FALSE, cache=FALSE>>=
+opts_chunk$set(tidy=TRUE, tidy.opts=list(width=75))
 CODEDIR <- Sys.getenv("CODEDIR")
 DATADIR <- Sys.getenv("DATADIR")
 library(xtable)
@@ -54,7 +54,7 @@ library(reshape)
 library(plyr)
 library(stringr)
 library(made4)
-options(width=60)
+options(width=70)
 @
 
 
@@ -83,7 +83,7 @@ Each section in this workshop introduces a new concept or tool. Each section con
 
 \subsection{Code}
 To use R, one must write code. This document contains code for different purposes, and it is formatted in a characteristic and consistent way throughout.
-<<code_eg, eval=TRUE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
+<<code_eg, eval=TRUE, cache=TRUE, result='asis',background='#FDFDFD'>>=
 # boxes like this contain example code
 
 # comments start with a hash 
@@ -95,38 +95,29 @@ print("this line has no hash at the start, so is run")
 # There are three kinds of problems for you to attempt:
 @
 
-\subsubsection{Write some code! (aka problems)}
-<<ex_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
-# You should attempt to acheive all problems in green
+\subsubsection{Exercises (aka problems)}
+<<ex_work1, eval=TRUE, cache=TRUE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
+# You should try to complete all exercises in green
 @
 
-<<ex_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
-# If you are progressing well, attempt problems in orange also (as an extension)
+<<ex_work2, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>= 
+# If you are progressing well, attempt exercises in orange also (as an extension)
 @
 
-<<ex_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
-# Problems in Purple are designed to be difficult. These are problems you might want to think about later.
+<<ex_work3, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FFDDDD', highlight=FALSE>>=
+# Purple exercises are designed to be difficult. If you can do these, great. Otherwise, you might want to think about them later.
 @
 
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<ex_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
-# Trainer solutions to the problems are included in (uncoloured) plaintext
+<<ex_soln, eval=TRUE, cache=TRUE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
+# Trainer solutions to the Exercises are included on a blue background
 @
 \fi
 
 \part{Working in R}
 \section{Fundamentals}
-\subsection{Arithmetic}
-One can use R just like a calculator, to do basic arithmetic:
 
-<<arithmetic, eval=TRUE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
-1+1
-2*4
-3^4
-exp(3)         # e to the power of 3
-pi*(2.5^2)     # area of a circle
-tan(0.5)       # trigonometry
 @
 
 \subsection{Functions}
@@ -140,7 +131,7 @@ It is possible to write functions for commonly performed activities, and this is
 So, libraries/packages contain collections of functions, which are what get things done. When one first opens R, the \textit{base} library is automatically loaded, and provides the fundamental functions. \\
 The following code shows the installation and loading of a library
 
-<<libraries, eval=TRUE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
+<<libraries, eval=TRUE, cache=TRUE, result='asis',background='#FDFDFD'>>=
 # install a package
 install.packages("ggplot2")
 # load the package
@@ -158,156 +149,137 @@ Most functions in R have a help page that explains how to use the function. One 
 
 I generally use Google, but be warned -- because its name is so short, "R" is a difficult term to search for -- try to be specific
 
+\section{What makes R useful? What can it do?}
 
-\section{Data types}
-R has different ways of storing data, that are appropriate for different uses.
-\subsection{The vector type}
+\section{Data}
 
-<<vector, eval=TRUE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
-# a is a numeric vector
-a <- c(1,2,3,4,5)
-a
+\subsection{load some data, from a file, into R}
 
-# R can do vector arithmetic
-a + 1
-a * 2
-2 ^ a
+We don't want to type in data by hand. Usually, we have data in a spreadsheet that we want to analyse. There are two main ways you can do this:
+\begin{enumerate}
+\item{If you have a spreadsheet program, you can select data, and copy it to the clipboard. Typing \\
+\texttt{myData <- read.table(file="clipboard")} \\
+will read those data into a variable called myData
+}
+\item{This is handy, but if this is something you will do again and again, it's a bit cumbersome. It's also easy to make mistakes. A more robust alternative is to export the data from the excel file to a csv\footnote{ Click on (File - Save As) and select csv or "Comma separated" as the type of file.}}
+\end{enumerate}
 
-# vectors can be split into components by indexing
-# get the first element of the vector
-a[1]   
 
-# get the first three elements of the vector
-a[1:3] 
+The exact way to read in the data is determined by the format of your csv file. eg,
 
-# get all the elements of the vector except the second
-a[-2]  
-
-# replace the second element of the vector
-a[2] <- 10
-a
-
-# try replacing it with something else
-a[2] <- "10"
-a
-# the vector has been changed ("cast") to a character vector (note that 10, above, is quoted), and can no longer be used for arithmetic
-a + 1
-
-# Oops! It can be changed back though, using a function:
-as.numeric(a) + 1
+\texttt{\\
+sample, cultivar, height, tillers, grain, group\\
+1,      RAC,      3.25,   5,       4,     drought\\
+2,      EXCAL,    3.25,   5,       4,     drought\\
+3,      RAC,      3.25,   5,       4,     control\\
+4,      EXCAL,    3.25,   5,       4,     control} \\
+Then you would read it in with the command:
+<<csv_read_1, eval=FALSE, cache=TRUE, result='asis',background='#FDFDFD'>>=
+setwd("~/R_workshop_handout")  # set the working directory (where R looks for files)
+filename     <- "plex_dat_small.csv"   # define the filename
+drought_data <- read.table(filename, header=TRUE, sep=",", 
+                            stringsAsFactors=FALSE)
 @
+\textit{(Note that factors are a type of data that we have not discussed and are out of scope for this workshop. Avoid them for now.)}
+
+Alternatively, if the csv file looked like this:\\
+\texttt{\\
+"sample"  "cultivar"  "height"  "tillers"  "grain"  "group"\\
+1       "RAC"       3.25    5        4      "drought"\\
+2       "EXCAL"     3.25    5        4      "drought"\\
+3       "RAC"       3.25    5        4      "control"\\
+4       "EXCAL"     3.25    5        4      "control"\\
+}\\
+Then you would read it in with the command:
+<<csv_2, eval=FALSE, cache=TRUE, result='asis',background='#FDFDFD'>>=
+drought_data <- read.table(filename, header=TRUE, sep=" ", quote="\"", stringsAsFactors=FALSE)
+@
+
+The idea here, is that we have a quote symbol within quotes. In other words, we tell R which character denotes a quotation. Because the quotation character itself has special meaning to R, we have to tell R that we really mean the character and are not just finishing the quotation. We do this by putting a backslash in front of the character. This is also called "escaping" the character. If we just had three quote symbols in a row (without the backslash) R would think we were opening and closing a quotation, and then opening another -- the second one would never be closed, which would cause an error.
 
 %%% PROBLEMS
-\subsubsection{Write some code!}
-<<vector_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
-# 1. Create a vector of length 5, containing any integers you like
+\subsubsection{Exercises}
 
-# 2. get the 3rd element and store it in another vector
+%% generate the csv file:
+% plex_dat <- read.table("~/R_workshop_handout/TA44.dat", header=TRUE, quote="\"")
+% plex_dat$affy <- gsub("_[0-9]{7}","",row.names(plex_dat))
+% plex_dat <- plex_dat[!duplicated(plex_dat$affy),]
+% row.names(plex_dat) <- plex_dat$affy
+% plex_dat <- plex_dat[!duplicated(plex_dat$affy),]
+% plex_dat <- plex_dat[,-25]
+% write.table(plex_dat,file="~/R_workshop_handout/plex_dat.dat")
 
-# 3. get all the elements except the 3rd, and store them in another vector
+<<readin_work1, eval=TRUE, cache=TRUE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
+# There is a csv file that you can read. It is located at [plex_dat_small.csv]. 
+
+# 1. Open this file in RStudio, using [FILE -> Open File]
+# in the menu. This will open the file in a text-editor within  
+# RStudio so that its contents and formatting can be viewed.
+
+# 2. Read in the file, using read.table, to a new variable.
+
+# 3. What are the column names?
+
+# 4. What are the first 10 row names?
+
+# 5.1. Extract rows 1 and 2
+
+# 5.2. Find the difference between the two rows
+
 @
 
-<<vector_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
-# 4. take the vectors created in steps 2. and 3. and combine them into a new vector 
+<<readin_work2, eval=FALSE, cache=TRUE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>= 
 
-# 5. take the vector created in 1., and create a new vector that is the same except that the 2nd and 4th values are replaced with -99
+# 6. list and plot all the data for probe "Ta.10026.1.A1_at"
 
-# 6. find the sum of all the elements of the vector from 1.
-
-# 7. use the vector created in 5., find the sum of its elements squared
-
-# 7b. use the vector created in 5., find the sum of its elements, except the -99s, squared 
+# 7. create a histogram of the data in column "X2.WL711.susceptible.irrigated" try: ??histogram
 @
 
-<<vector_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
-# 8. read the help for the function "seq", and use it to create a vector containing the values 0 to 99 in increments of three (eg 0, 3, 6, 9....)
-
-# 9. from the vector created in step 8., make a vector containing all the values that are multiples of two
-# hint -- explore the modulo function, %%, read help('%%')
+<<readin_work3, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FFDDDD', highlight=FALSE>>=
+# 8. Plot the data in row 5 (use the [plot] and [lines] functions)
 @
 
 %%% SOLUTIONS
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<vector_soln, eval=FALSE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
-# Trainer solutions to the problems are included in plaintext
-# 1 
-a <- c(1, 2, 3, 4, 5)
-length(a)
-
-# 2
-b <- a[3]
-
-# 3
-c <- a[-3]
-
-# 4
-d <- c(b, c)
-
-# 5
-a99 <- a
-a99[c(2, 4)] <- -99
-
-# 6
-sum(a)
-
-# 7
-sum(a99^2)
-
-# 7b
-sum(a99[a99 != -99]^2)
-
-# 8
-f <- seq(0, 99, 3)
-
-# 9
-g <- f[f %% 2 == 0]
-@
-\fi
-
-\subsection{The list type}
-Vectors must be all one \textit{type} of data -- eg. numeric, character, boolean. Lists do not have this restriction, and can mix types of data
-
-<<list, eval=TRUE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
-my_list <- list("I", "have", 10, "cars")
-
-# one can even put a vector inside a list (a is the numeric vector from before)
-my_list[[5]] <- a
-
-# getting a subset of a list is similar to a vector, but notice the double brackets
-my_list[[3]]
-
-#...but it can get tricky
-my_list[[5]][1:2]
-@
-
-%%% PROBLEMS
-\subsubsection{Write some code!}
-
-<<list_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
+<<readin_soln, eval=FALSE, cache=TRUE, result='hide', size="large",background='#DDFFFF', highlight=FALSE>>=
 # 1. 
-@
 
-<<list_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
-# 4. 
-@
+# 2. Read in the file, using read.table, to a new variable.
+plex_dat <- read.table("~/R_workshop_handout/plex_dat.dat", header=TRUE, quote="\"")
 
-<<list_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
-# 
-@
+# 3. Make a list of the column names
+names(plex_dat)
 
-%%% SOLUTIONS
-\iftrainermanual
-\subsubsection{Trainer solutions}
-<<list_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
-# Trainer solutions to the problems are included in plaintext
+# 4. Make a list of the first 10 row names
+row.names(plex_dat)[1:10]
+
+# 5. Calculate the difference, at each sample, between rows 1 and 2
+t(plex_dat[1,] - plex_dat[2,])
+
+# 6. list and plot all the data for probe "Ta.10026.1.A1_at"
+data <- plex_dat[row.names(plex_dat) == "Ta.10026.1.A1_at",]
+plot(t(plex_dat[row.names(plex_dat) == "Ta.10026.1.A1_at",]))
+lines(t(plex_dat[row.names(plex_dat) == "Ta.10026.1.A1_at",]))
+
+# 7. create a histogram of the data in column "X2.WL711.susceptible.irrigated"
+data <- plex_dat$"X2.WL711.susceptible.irrigated"
+hist(plex_dat$"X2.WL711.susceptible.irrigated")
+
+# 8. Plot the data in row 5
+plot(t(plex_dat[5,]))
+lines(t(plex_dat[5,]))
 @
 \fi
 
-\subsection{The data.frame type}
-data.frames are great. They are ideal for storing and manipulating experimental data. Think of them as a spreadsheet, where columns can contain different types of data. Data can be sliced and diced in many ways, and it is easy to aggregate the data too.
+\subsection{The data.frame}
+We've now read some data into a variable. The type of this variable is a \textit{data.frame}. \\
+\\
+data.frames are great. They're the most common way of manipulating data in R. They are ideal for storing and manipulating experimental data. Think of them as similar to a spreadsheet, where each column can contain one type of data. Data can be sliced and diced in many ways, and it is easy to aggregate the data too.
 
-<<data_frame, eval=TRUE, fig.width=3, fig.height=3, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
+TODO: the data below are different -- rejig this section so that the data refer back to plexDat from the previous section.
+
+<<data_frame, eval=TRUE, fig.width=3, fig.height=3, cache=TRUE, result='asis',background='#FDFDFD'>>=
 cultivar <- c("RAC","RAC","RAC","EXCAL","EXCAL","EXCAL","EXCAL")
 height   <- c( 0.6 ,0.57 ,0.62 , 0.92  , 0.77  , 0.55  , 0.76  )
 drought  <- c(FALSE,TRUE, TRUE , FALSE , TRUE  , TRUE  , FALSE )
@@ -336,43 +308,64 @@ df[df$drought,-3]
 
 # visualise the data
 library(ggplot2)
-ggplot(df, aes(cultivar, height)) + geom_point() + facet_wrap(~drought)
-
+# add a new column for better annotation of the figure
+df$treatment[df_plot$drought] <- "drought"
+df$treatment[!df_plot$drought] <- "control"
+ggplot(df, aes(cultivar, height)) + geom_point() + facet_wrap(~treatment)
 @
 
 %%% PROBLEMS
-\subsubsection{Write some code!}
-<<df_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
-# 1. there is a data.frame called mtcars -- look at it
+\subsubsection{Exercises}
+<<df_work1, eval=TRUE, cache=TRUE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
+# 1.1. there is a data.frame called mtcars -- look at it
 # Note: if you break the mtcars data somehow, you can reload/reset it by typing
 data(mtcars)
 
-# 2. create a table counting the number of cars with different number of cylinders (hint: use the "table" function)
+# 1.2. Extract the second row of mtcars, and store it in a vector
 
-# 3. plot a histogram of the milage of the cars (hint: use the "hist" function)
+# 1.3. Extract the second through fifth rows of mtcars, and store them in a data.frame
 
-# 4. calculate the mean hp of the 4, 6 and 8 cylinder cars separately (hint: use the "mean" function). Try to find at least three different ways of subsetting the data.frame
+# 1.4. create a table counting the number of cars with different number of cylinders (hint: use the "table" function)
+
+# 1.5. calculate the mean hp of the 4, 6 and 8 cylinder cars separately (hint: use the "mean" function). Try to find at least three different ways of subsetting the data.frame
+
+# 1.6. for each car, calculate the hp to cyl ratio (horse-power per cylinder: a very important quantity!), store it in a new column in the dataframe called "hp2cyl"
+
+# 1.7. It has been found that the cars' weight was overestimated by 5% for cars weighing more than 3.5 tons -- correct this
+
+## look at some plexDB data
+
+# 2.1. in the previous exercises, we read in a file called plex_dat_small.csv -- this is a small version of the file plex_dat.csv -- this time, read in the whole file, and store it in a data.frame
+
+# 2.2. how many rows and columns are there in this file?
+
+# 2.3. what are the column names?
+
+# 2.3. plot a histogram of column X3.WL711.susceptible.irrigated (hint: use the "hist" function)
+
+# 2.4. plot a histogram of row Ta.10015.3.S1_at
 
 @
 
-<<df_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
-# 5. create a scatterplot of mpg vs hp (hint: use the "plot" function)
+<<df_work2, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>= 
+# 1.8. from the mtcars data.frame, create a scatterplot of mpg vs hp (hint: use the "plot" function)
 
-# 6. for each car, calculate the hp to cyl ratio (horse-power per cylinder: a very important quantity!), store it in a new column in the dataframe called "hp2cyl"
+# 2.5 Create a scatterplot of probe Ta.8722.1.S1_at versus probe Ta.11279.1.A1_at
 
-# 7. It has been found that the cars' weight was overestimated by 5% for cars weighing more than 3.5 tons -- correct this
+# 2.6 Calculate the Pearson correlation between probes Ta.8722.1.S1_at and Ta.11279.1.A1_at 
+
 @
 
-<<df_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
-# 8. install the "plyr" library, and repeat what you did in step 4 using the function ddply, a function in that library
+<<df_work3, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FFDDDD', highlight=FALSE>>=
+# 1.9. install the "plyr" library, and repeat what you did in exercise 5 using the function ddply, a function in that library
 
-# 9. install the "ggplot2" library, and explore different visualisations of the data
+# 1.10. install and load the "ggplot2" library. Then explore different visualisations of the mtcars data
 @
 
 %%% SOLUTIONS
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<df_soln, eval=FALSE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
+<<df_soln, eval=FALSE, cache=TRUE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
 # 1. there is a data.frame called mtcars -- look at it
 mtcars
 
@@ -412,115 +405,14 @@ print(p)
 @
 \fi
 
-\section{How to read in data}
-This is nice, but we don't want to type in data by hand. Usually, we have data in a spreadsheet that we want to analyse. The way to get these data into R is as follows:
-
-In a spreadsheet program, export the data in csv\footnote{comma-separated values} format. Some programs give the option to control the formatting, which depends on the data. Although csv files are nominally separated by a comma, one can choose any symbol -- use a symbol that does \textit{not} exist in your data: some good options are [\(, ; : | /\)] -- but one should definitely avoid \$ and \textbackslash. You may have the option to enclose any strings (writing) in quotation marks. That can be helpful, though I generally don't bother. \\
-
-The exact way one reads in the data is determined by the format of your csv file. eg,
-
-\texttt{\\
-sample, cultivar, height, tillers, grain, group\\
-1,      RAC,      3.25,   5,       4,     drought\\
-2,      EXCAL,    3.25,   5,       4,     drought\\
-3,      RAC,      3.25,   5,       4,     control\\
-4,      EXCAL,    3.25,   5,       4,     control}
-Then you would read it in with the command:
-<<csv_read_1, eval=FALSE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
-my.data.frame <- read.table(filename, header=TRUE, sep=",", 
-                            stringsAsFactors=FALSE)
-@
-\textit{(Note that factors are a type of data that we have not discussed and are out of scope for this workshop. Avoid them for now.)}
-
-Alternatively, if the csv file looked like this:\\
-\texttt{\\
-"sample"  "cultivar"  "height"  "tillers"  "grain"  "group"\\
-1       "RAC"       3.25    5        4      "drought"\\
-2       "EXCAL"     3.25    5        4      "drought"\\
-3       "RAC"       3.25    5        4      "control"\\
-4       "EXCAL"     3.25    5        4      "control"\\
-}\\
-Then you would read it in with the command:
-<<csv_2, eval=FALSE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
-my.data.frame <- read.table(filename, header=TRUE, sep=" ", quote="\"", stringsAsFactors=FALSE)
-@
-
-The idea here, is that we have a quote symbol within quotes. In other words, we tell R which character denotes a quotation. Because the quotation character itself has special meaning to R, we have to tell R that we really mean the character and are not just finishing the quotation. We do this by putting a backslash in front of the character. This is also called "escaping" the character. If we just had three quote symbols in a row (without the backslash) R would think we were opening and closing a quotation, and then opening another -- the second one would never be closed, which would cause an error.
-
-%%% PROBLEMS
-\subsubsection{Write some code!}
-
-%% generate the csv file:
-% plex_dat <- read.table("~/R_workshop_handout/TA44.dat", header=TRUE, quote="\"")
-% plex_dat$affy <- gsub("_[0-9]{7}","",row.names(plex_dat))
-% plex_dat <- plex_dat[!duplicated(plex_dat$affy),]
-% row.names(plex_dat) <- plex_dat$affy
-% plex_dat <- plex_dat[!duplicated(plex_dat$affy),]
-% plex_dat <- plex_dat[,-25]
-% write.table(plex_dat,file="~/R_workshop_handout/plex_dat.dat")
-
-<<readin_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
-# There is a csv file that you can read. It is located at [SHOW LOCATION HERE]. 
-
-# 1. Open this file in RStudio, using [FILE -> Open File]
-# in the menu. This will open the file in a text-editor within  
-# RStudio so that its contents and formatting can be viewed.
-
-# 2. Read in the file, using read.table, to a new variable.
-
-# 3. make a list of the column names
-
-# 4. make a list of the first 10 row names
-
-# 5. Calculate the difference, at each sample, between rows 1 and 2
-
-# 6. Plot the data in row 5 (use the plot and lines functions)
-
-# 7. use read.cross to read in the qtl.dat file
-@
-
-<<readin_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
-# 7. list and plot all the data for probe "Ta.10026.1.A1_at"
-
-# 8. create a histogram of the data in column "X2.WL711.susceptible.irrigated"
-@
-
-<<readin_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
-   
-@
-%%% SOLUTIONS
-\iftrainermanual
-\subsubsection{Trainer solutions}
-<<readin_soln, eval=FALSE, cache=TRUE, result='hide', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
-# 1. 
-
-# 2. Read in the file, using read.table, to a new variable.
-plex_dat <- read.table("~/R_workshop_handout/plex_dat.dat", header=TRUE, quote="\"")
-
-# 3. Make a list of the column names
-names(plex_dat)
-
-# 4. Make a list of the first 10 row names
-row.names(plex_dat)[1:10]
-
-# 5. Calculate the difference, at each sample, between rows 1 and 2
-t(plex_dat[1,] - plex_dat[2,])
-
-# 6. Plot the data in row 5
-plot(t(plex_dat[5,]))
-lines(t(plex_dat[5,]))
-
-# 7. list and plot all the data for probe "Ta.10026.1.A1_at"
-data <- plex_dat[row.names(plex_dat) == "Ta.10026.1.A1_at",]
-plot(t(plex_dat[row.names(plex_dat) == "Ta.10026.1.A1_at",]))
-lines(t(plex_dat[row.names(plex_dat) == "Ta.10026.1.A1_at",]))
-
-# 8. create a histogram of the data in column "X2.WL711.susceptible.irrigated"
-data <- plex_dat$"X2.WL711.susceptible.irrigated"
-hist(plex_dat$"X2.WL711.susceptible.irrigated")
-
-@
-\fi
+\section{Wrap-up Part I}
+In this section, we have covered
+\begin{itemize}
+\item{Basic data types in R: vector, data.frame}
+\item{Reading in data from a csv file}
+\item{Using libraries and help}
+\item{Subsetting a data.frame}
+\end{itemize}
 
 \part{rQTL}
 \section{Installation}
@@ -542,7 +434,7 @@ More information can be found by typing \texttt{?read.cross} in R.
 \subsection{Reading-in and interrogating qtl data}
 \texttt{read.cross} produces a complicated "object"\footnote{we have talked about several objects in this workshop: lists, vectors, data.frames. What we haven't talked about, and what is out-of-scope, is that it is possible to create custom objects. Normally, a custom object will consist of a list of other objects, or a list of lists of other objects, etc... This exploits the fact that different objects can be mixed within a list}. With a small object, \texttt{str} can be useful to understand its internal structure, but that is less useful here because this object is too large.
 
-<<qtl_1, eval=FALSE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
+<<qtl_1, eval=FALSE, cache=TRUE, result='asis',background='#FDFDFD'>>=
 library(qtl)
 library(qtlPlus)
 
@@ -600,8 +492,8 @@ class(exmap)
 Note that when one types \texttt{exmap} (or whatever one has called the object) the object's contents are not printed -- just a summary of them.
 
 %%% PROBLEMS
-\subsection{Write some code!}
-<<qtl_1_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
+\subsection{Exercises}
+<<qtl_1_work1, eval=TRUE, cache=TRUE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
 # 1. Install and load the required function libraries
 
 
@@ -612,25 +504,25 @@ exmap <- read.cross(file = "qtl.dat", format = "csvr", genotypes = c("AA", "BB")
 
 @
 
-<<qtl_1_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
+<<qtl_1_work2, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>= 
 
 @
 
-<<qtl_1_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
+<<qtl_1_work3, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FFDDDD', highlight=FALSE>>=
 # nothing
 @
 
 %%% SOLUTIONS
 \iftrainermanual
 \subsection{Trainer solutions}
-<<qtl_1_soln, eval=FALSE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
+<<qtl_1_soln, eval=FALSE, cache=TRUE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
 # 1. Install and load the required function libraries
 install.packages("qtl")
 install.packages("qtlPlus")
 @
 
 \subsection{Subsetting qtl data}
-<<qtl_2, eval=FALSE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
+<<qtl_2, eval=FALSE, cache=TRUE, result='asis',background='#FDFDFD'>>=
 # subsetting your data to linkage group to first three linkage groups
 # this can be done in multiple different ways
 names(exmap$geno)
@@ -686,34 +578,34 @@ nind(exmaps)
 @
 
 %%% PROBLEMS
-\subsection{Write some code!}
-<<qtl_2_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
+\subsection{Exercises}
+<<qtl_2_work1, eval=TRUE, cache=TRUE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
 # 1. Create a new map that contains only marker data for the 1* chromasomes.
 
 # 2. Create a new map that contains only individuals without any missing marker data
 
 @
 
-<<qtl_2_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
+<<qtl_2_work2, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>= 
 
 # 2. Find any individuals possessing any markers that are not double haploid, and remove them from the object
 
 
 @
 
-<<qtl_2_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
+<<qtl_2_work3, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FFDDDD', highlight=FALSE>>=
 # 4. Find any individuals possessing a phenotype that is more than 4 standard deviations from the mean and, remove them. (useful functions: var, sqrt)
 @
 
 %%% SOLUTIONS
 \iftrainermanual
 \subsection{Trainer solutions}
-<<qtl_2_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
+<<qtl_2_soln, eval=TRUE, cache=TRUE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
 # nothing
 @
 
 \subsection{Other interrogation, modification and subsetting tools}
-<<qtl_3, eval=FALSE, cache=TRUE, result='asis', tidy.opts=list(keep.blank.line=FALSE)>>=
+<<qtl_3, eval=FALSE, cache=TRUE, result='asis',background='#FDFDFD'>>=
 # pull "map" component from each chromosome
 pm <- pull.map(exmap)
 pm
@@ -768,25 +660,25 @@ exmap$geno <- exmap$geno[mixedorder(names(exmap$geno))]
 @
 
 %%% PROBLEMS
-\subsection{Write some code!}
-<<qtl_3_work1, eval=TRUE, cache=TRUE, result='asis', background='#A7F7A7', tidy.opts=list(keep.blank.line=FALSE)>>=
+\subsection{Exercises}
+<<qtl_3_work1, eval=TRUE, cache=TRUE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
 #nothing
 @
 
-<<qtl_3_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfC7B9', tidy.opts=list(keep.blank.line=FALSE)>>= 
+<<qtl_3_work2, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>= 
 
 # find any markers with missing data in 4 or more individuals and remove them
 
 @
 
-<<qtl_3_work3, eval=TRUE, cache=TRUE, result='asis', background='#F7C5C7', tidy.opts=list(keep.blank.line=FALSE)>>=
+<<qtl_3_work3, eval=TRUE, cache=TRUE, result='asis', size="large",background='#FFDDDD', highlight=FALSE>>=
 # nothing
 @
 
 %%% SOLUTIONS
 \iftrainermanual
 \subsection{Trainer solutions}
-<<qtl_3_soln, eval=TRUE, cache=TRUE, result='asis', background='#F9F9FF', highlight=FALSE, tidy.opts=list(keep.blank.line=FALSE)>>=
+<<qtl_3_soln, eval=TRUE, cache=TRUE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
 # nothing
 @
 
