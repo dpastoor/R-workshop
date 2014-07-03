@@ -6,7 +6,6 @@
 *.out
 *.toc
 *.synctex.gz
-*.pdf
 .project
 cache*
 workshop_handout.tex
