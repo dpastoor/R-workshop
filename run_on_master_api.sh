@@ -2,6 +2,8 @@
 # script to be run on master node after rstudio servers are created. This makes 
 # their webservers available from the internet
 
+source 
+KEYPAIR_NAME=akw_keypair
 
 nova secgroup-create r_serv "RStudio server"
 # note that the CIDR (last param) restricts logins to (mostly) Uni of Adl IP addresses
