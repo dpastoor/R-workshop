@@ -20,6 +20,10 @@ for this_serv in $servers; do
 done
 
 
+## push a required R package to each node and install it
+# get a list of nodes:
+nova list | grep rVM-akw- | grep -E -o "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}" > hosts.txt
+
 
 # useful
 nova list
