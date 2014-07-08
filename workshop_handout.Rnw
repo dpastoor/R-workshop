@@ -10,13 +10,14 @@
 \trainermanualtrue
 
 \usepackage{url}
+\usepackage{graphicx}
 \usepackage[paper=a4paper,top=35mm,left=25mm,right=25mm,bottom=30mm]{geometry}
 
 % Set some Workshop specific info
 \iftrainermanual
 \title{TRAINER MANUAL for R and rqtl workshop}
 \else
-\title{Introductory workshop for R and rqtl}
+\title{Introductory workshop for R and R/qtl}
 \fi
 \date{May 2014}
 \author{Angus Wallace and Julian Taylor}
@@ -46,7 +47,7 @@
 \setlength{\parskip}{2ex}
 
 <<setup, echo=FALSE, include=FALSE, cache=FALSE>>=
-opts_chunk$set(tidy=TRUE, tidy.opts=list(width=70))
+opts_chunk$set(tidy=TRUE, tidy.opts=list(width.cutoff=70))
 CODEDIR <- Sys.getenv("CODEDIR")
 DATADIR <- Sys.getenv("DATADIR")
 library(xtable)
@@ -141,8 +142,8 @@ library(ggplot2)
 \subsection{Working directory}
 If you ask R to open a file without telling it where to look for that file, it will look in the current working directory. If it doesn't find the file there, it will report "no such file or directory". It is easy to query and change the working directory in R, by using the getwd() and setwd() functions. \\
 \\
-But it's even easier in RStudio. Just go
-Session -> Set Working Directory -> Choose Directory
+But it's even easier in RStudio. Just go \\
+Session -- Set Working Directory -- Choose Directory \\
 and choose where you want to be. 
 
 Do this now, and select the Desktop.

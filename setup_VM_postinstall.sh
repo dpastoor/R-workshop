@@ -15,7 +15,7 @@ FIREFOX_LINK_URL='http://australianbioinformatics.net/'
 echo -e "ubuntu:${REMOTE_UBUNTU_PASSWORD}" | chpasswd
 
 # add a cran repository
-echo -e "\n# CRAN repository for RStudio\n" >> /etc/apt/sources.list
+echo -e "\n# CRAN repository for RStudio" >> /etc/apt/sources.list
 echo deb http://cran.csiro.au/bin/linux/ubuntu precise/ >> /etc/apt/sources.list
 
 # add a key reqd for the CRAN packages
@@ -38,6 +38,7 @@ dpkg-reconfigure --frontend noninteractive tzdata
 apt-get install -y \
   r-base \
   r-base-dev \
+  git \
   gdebi-core \
   libapparmor1 
   
@@ -64,20 +65,22 @@ Icon=/usr/lib/firefox/browser/icons/mozicon128.png
 Terminal=FALSE" > /home/${REMOTE_USER_USERNAME}/Desktop/firefox_abn_link.desktop
 chmod +x /home/${REMOTE_USER_USERNAME}/Desktop/firefox_abn_link.desktop
 
+### install some required R packages
 
+# get the package
+cd /root/
+git clone https://github.com/wall0159/R-workshop.git
+R -e 'install.packages(pkgs=c("qtl","gtools","fields"), dependencies=TRUE, repos="http://mirror.aarnet.edu.au/pub/CRAN/")'
+R -e 'install.packages("/root/R-workshop/jules/ASMap_akw.tar.gz")'
 
 # alter the rstudio server so that it runs on port 80
 echo -e "\n# alter the rstudio server so that it runs on port 80\n" >> /etc/rstudio/rserver.conf
 echo -e "www-port=80\n" >> /etc/rstudio/rserver.conf
 rstudio-server restart
 
-# clone the workshop git repository so that the needed data are accessible
-cd /home/${REMOTE_USER_USERNAME}/
-git clone https://github.com/wall0159/R-workshop.git
-cp /home/${REMOTE_USER_USERNAME}/R-workshop/plex_dat* /home/${REMOTE_USER_USERNAME}/
-
 
 # Since this script is run as root, any files created by it are owned by root:root.
 # Therefore, we'll ensure all files under /home/${REMOTE_USER_USERNAME} are owned
 # by the correct user:
 chown --recursive ${REMOTE_USER_USERNAME}:${REMOTE_USER_USERNAME} /home/${REMOTE_USER_USERNAME}/
+
