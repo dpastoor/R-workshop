@@ -4,10 +4,11 @@
 % Example Workshop Handout with title page and a section demonstrating
 % the different environments defined in the top matter
 
+\renewcommand{\baselinestretch}{1.05}
 
 % if trainermanual is true, then include extra info in the report
 \newif\iftrainermanual
-\trainermanualtrue
+\trainermanualfalse
 
 \usepackage{url}
 \usepackage{graphicx}
@@ -87,7 +88,7 @@ To use R, one must write code. This document contains code for different purpose
 <<code_eg, eval=TRUE, cache=FALSE, result='asis',background='#FDFDFD'>>=
 # boxes like this contain example code
 
-# comments start with a hash 
+# comments start with a hash
 # (like this line, which is not run)
 print("this line has no hash at the start, so is run")
 
@@ -97,21 +98,21 @@ print("this line has no hash at the start, so is run")
 @
 
 \subsubsection{Exercises (aka problems)}
-<<ex_work1, eval=TRUE, cache=FALSE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
+<<ex_work1, eval=TRUE, cache=FALSE, result='asis', size="large",background='#F2FFF2', highlight=FALSE>>=
 # You should try to complete all exercises in green
 @
 
-<<ex_work2, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>= 
-# If you are progressing well, attempt exercises in orange also (as an extension)
+<<ex_work2, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FfFCEA', highlight=FALSE>>=
+# If you are progressing well, attempt exercises in yellow also (as an extension)
 @
 
-<<ex_work3, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FFDDDD', highlight=FALSE>>=
-# Purple exercises are designed to be difficult. If you can do these, great. Otherwise, you might want to think about them later.
+<<ex_work3, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FFEFEF', highlight=FALSE>>=
+# Red exercises are designed to be difficult. If you can do these, great. Otherwise, you might want to think about them later.
 @
 
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<ex_soln, eval=TRUE, cache=FALSE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
+<<ex_soln, eval=TRUE, cache=FALSE, result='asis', size="large",background='#EEFFFF', highlight=FALSE>>=
 # Trainer solutions to the Exercises are included on a blue background
 @
 \fi
@@ -130,18 +131,19 @@ It is possible to write functions for commonly performed activities, and this is
 So, libraries/packages contain collections of functions, which are what get things done. When one first opens R, the \textit{base} library is automatically loaded, and provides the fundamental functions. \\
 The following code shows the installation and loading of a library
 
-<<libraries, eval=TRUE, cache=FALSE, result='asis',background='#FDFDFD'>>=
+<<libraries, eval=TRUE, cache=TRUE, result='asis',background='#FDFDFD'>>=
 # install a package
 install.packages("ggplot2")
 # load the package
 library(ggplot2)
 
-# note that when installing, one needs to quote the package name, but when loading it one does not 
+# note that when installing, one needs to quote the package name, but when loading it one does not
 @
 
 \subsection{Working directory}
 If you ask R to open a file without telling it where to look for that file, it will look in the current working directory. If it doesn't find the file there, it will report "no such file or directory". It is easy to query and change the working directory in R, by using the getwd() and setwd() functions. \\
 \\
+
 But it's even easier in RStudio. Just go \\
 Session -- Set Working Directory -- Choose Directory \\
 and choose where you want to be. 
@@ -189,7 +191,7 @@ Then you would read it in with the command:
 <<csv_read_1, eval=FALSE, cache=FALSE, result='asis',background='#FDFDFD'>>=
 setwd("~/R_workshop_handout")  # set the working directory (where R looks for files)
 filename     <- "plex_dat_small.csv"   # define the filename
-drought_data <- read.table(filename, header=TRUE, sep=",", 
+drought_data <- read.table(filename, header=TRUE, sep=",",
                             stringsAsFactors=FALSE)
 @
 
@@ -226,11 +228,11 @@ Go to \url{dropcanvas.com/0z3wq} and download the two files onto your Desktop
 % plex_dat <- plex_dat[,-25]
 % write.table(plex_dat,file="~/R_workshop_handout/plex_dat.dat")
 
-<<readin_work1, eval=TRUE, cache=FALSE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
-# There is a csv file that you can read. It is located at [plex_dat_small.csv]. 
+<<readin_work1, eval=TRUE, cache=FALSE, result='asis', size="large",background='#F2FFF2', highlight=FALSE>>=
+# There is a csv file that you can read. It is located at [plex_dat_small.csv].
 
 # 1. Open this file in RStudio, using [FILE -> Open File]
-# in the menu. This will open the file in a text-editor within  
+# in the menu. This will open the file in a text-editor within
 # RStudio so that its contents and formatting can be viewed.
 
 # 2. Read in the file, using read.table, to a new variable.
@@ -245,22 +247,22 @@ Go to \url{dropcanvas.com/0z3wq} and download the two files onto your Desktop
 
 @
 
-<<readin_work2, eval=FALSE, cache=FALSE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>= 
+<<readin_work2, eval=FALSE, cache=FALSE, result='asis', size="large",background='#FfFCEA', highlight=FALSE>>=
 
 # 6. list and plot all the data for probe "Ta.10026.1.A1_at"
 
 # 7. create a histogram of the data in column "X2.WL711.susceptible.irrigated" try: ??histogram
 @
 
-<<readin_work3, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FFDDDD', highlight=FALSE>>=
+<<readin_work3, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FFEFEF', highlight=FALSE>>=
 # 8. Plot the data in row 5 (use the [plot], [lines] and [t] (transpose) functions)
 @
 
 %%% SOLUTIONS
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<readin_soln, eval=FALSE, cache=FALSE, result='hide', size="large",background='#DDFFFF', highlight=FALSE>>=
-# 1. 
+<<readin_soln, eval=FALSE, cache=FALSE, result='hide', size="large",background='#EEFFFF', highlight=FALSE>>=
+# 1.
 
 # 2. Read in the file, using read.table, to a new variable.
 plex_dat <- read.table("plex_dat_small.dat", header=TRUE, quote="\"")
@@ -351,7 +353,7 @@ ggplot(df, aes(cultivar, height)) + geom_point() + facet_wrap(~treatment)
 
 %%% PROBLEMS
 \subsubsection{Exercises}
-<<df_work1, eval=TRUE, cache=FALSE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
+<<df_work1, eval=TRUE, cache=FALSE, result='asis', size="large",background='#F2FFF2', highlight=FALSE>>=
 # 1.1. there is a data.frame called mtcars -- look at it
 # Note: if you break the mtcars data somehow, you can reload/reset it by typing
 data(mtcars)
@@ -390,16 +392,16 @@ data(mtcars)
 
 @
 
-<<df_work2, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>= 
+<<df_work2, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FfFCEA', highlight=FALSE>>=
 # 1.8. from the mtcars data.frame, create a scatterplot of mpg vs hp (hint: use the "plot" function)
 
 # 2.5 Create a scatterplot of probe Ta.8722.1.S1_at versus probe Ta.11279.1.A1_at
 
-# 2.6 Calculate the Pearson correlation between probes Ta.8722.1.S1_at and Ta.11279.1.A1_at 
+# 2.6 Calculate the Pearson correlation between probes Ta.8722.1.S1_at and Ta.11279.1.A1_at
 
 @
 
-<<df_work3, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FFDDDD', highlight=FALSE>>=
+<<df_work3, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FFEFEF', highlight=FALSE>>=
 # 1.9. install the "plyr" library, and repeat what you did in exercise 1.5 using the function ddply, a function in that library
 
 # 1.10. install and load the "ggplot2" library. Then explore different visualisations of the mtcars data
@@ -408,7 +410,7 @@ data(mtcars)
 %%% SOLUTIONS
 \iftrainermanual
 \subsubsection{Trainer solutions}
-<<df_soln, eval=FALSE, cache=FALSE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
+<<df_soln, eval=FALSE, cache=FALSE, result='asis', size="large",background='#EEFFFF', highlight=FALSE>>=
 # 1.1. there is a data.frame called mtcars -- look at it
 # Note: if you break the mtcars data somehow, you can reload/reset it by typing
 data(mtcars)
@@ -467,7 +469,7 @@ plot(mtcars$mpg, mtcars$hp)
 # 2.5 Create a scatterplot of probe Ta.8722.1.S1_at versus probe Ta.11279.1.A1_at
 plot(plex_dat["Ta.8722.1.S1_at",],plex_dat["Ta.11279.1.A1_at",])
 
-# 2.6 Calculate the Pearson correlation between probes Ta.8722.1.S1_at and Ta.11279.1.A1_at 
+# 2.6 Calculate the Pearson correlation between probes Ta.8722.1.S1_at and Ta.11279.1.A1_at
 cor(plex_dat["Ta.8722.1.S1_at",],plex_dat["Ta.11279.1.A1_at",])
 
 # 8. install the "plyr" library, and repeat what you did in step 4 using the function ddply, a function in that library
@@ -479,7 +481,7 @@ ddply(mtcars, .(cyl), function(x) mean(x$hp))
 p <- ggplot(mtcars, aes(wt, mpg))
 p <- p + geom_point(aes(size = qsec, colour=hp, shape=factor(cyl))) +
          scale_colour_gradient(low = "blue", high="red") +
-         ggtitle("a 5-dimensional graph")
+         ggtitle("a 5-D graph")
 print(p)
 
 @
@@ -519,7 +521,7 @@ library(qtl)
 library(ASMap)
 @
 To install R/qtl and R/ASMap, type \texttt{}
-<<qtl_02, eval=FALSE, cache=FALSE, result='asis',warning=FALSE>>=
+<<qtl_02, eval=FALSE, cache=TRUE, result='asis',warning=FALSE>>=
 # load the libraries
 install.packages('qtl')
 install.packages('ASMap')
@@ -534,20 +536,20 @@ package. One is a constructed linkage map of a DH population that
 has markers clustered and optimally ordered in assigned chromosomes
 (exmapC.csv) and the other is an unconstructed version of the same map
 with all markers assigned to one chromosome (exmapU.csv). In the
-latter map I have also added other markers with potential problems
+latter data I have also added other markers with potential problems
 that we may need to take care of before constructing the map.
 
 The R/qtl package includes a function, \texttt{read.cross()} that is
 designed to read a specifically formatted file containing genetic marker
 data. It can handle a large range of formats including files exported
 from MapManager, MapMaker and QTL Cartographer. It also handles
-Micorsoft Excel files in CSV format and ``rotated'' CSV format (see
+Microsoft Excel files in CSV format and ``rotated'' CSV format (see
 \texttt{?read.cross} for more details). The format we will be using
-in this workshop will be the roatated CSV format. Note, this is not a format
+in this workshop will be the rotated CSV format. Note, this is not a format
 that actually exists in Excel. It is just a type of CSV file that Karl
 Broman has invented for use with the R/qtl package.
 
-The first 10 columns and 15 rows of the rotated CSV file (exampC.csv) we will be
+The first 10 columns and 15 rows of the rotated CSV file (exmapC.csv) we will be
 reading in is given in the table \ref{fig:spread}. Important things to note about this format
 \begin{enumerate}
   \item Marker names are always in \textbf{first} column
@@ -574,7 +576,7 @@ but once you have set this up once or twice it becomes second nature.
 
 An example of a typical call to \texttt{read.cross} would look like
 <<qtl-0,eval=FALSE,echo=TRUE>>=
-exmap <- read.cross(file = "exmapC.csv", format = "csvr", genotypes = c("AA", "BB"), na.strings = c("-"), map.function = "kosambi", estimate.map = FALSE)
+exmapc <- read.cross(file = "exmapC.csv", format = "csvr", genotypes = c("AA", "BB"), na.strings = c("-"), map.function = "kosambi", estimate.map = FALSE)
 @
 Each of the arguments plays an important role in determining how the
 data is read in
@@ -596,14 +598,14 @@ R.
 It is important to understand the structure of the data once it is
 read in as this will allow you to explore and manipulate parts of the
 R/qtl object. The explicit structure of the object can be summarised
-graphically in \ref{fig:struc} and can be viewed as a hierarchical
+graphically in Figure \ref{fig:struc} and can be viewed as a hierarchical
 list. Any box below another box with arrow connecting is a list
 element of the box above it. The terminal boxes at the bottom are
 where the data is placed once the object is read in.
 
 For example, following the graphic down the left hand side of the tree
 you will see the \texttt{object} has a \texttt{pheno} list element. This is
-where the phenoptypic components of the data are placed. They are
+where the phenotypic components of the data are placed. They are
 stored in a data frame with $s$ columns named by \texttt{Y1}, \texttt{Y2},
 $\ldots$, \texttt{Ys}. These names are taken directly from the
 rotated CSV file. \textbf{Note: The column that contains the genotype names is also stored here.}
@@ -638,7 +640,7 @@ In this section we will read in the constructed linkage map into R/qtl
 explore the resulting object by looking at the
 hierarchical components described in Figure \ref{fig:struc}.
 
-<<qtl_1, eval=TRUE, cache=FALSE, result='asis',warning=FALSE>>=
+<<qtl_1, eval=TRUE, cache=TRUE, result='asis',warning=FALSE>>=
 
 # the same data can be read in from a file using read.cross()
 exmapc <- read.cross(file = "exmapC.csv", format = "csvr", genotypes = c("AA", "BB"),
@@ -657,11 +659,11 @@ str(exmapc$geno$"1A")
 
 # Each linkage group has two elements, "map" and "data".For each linkage group,
 # the length of the "map" and the number of columns of the "data" will match each
-# other. The rows exactly line up with the names in exmap$pheno$Genotype. R/qtl
+# other. The rows exactly line up with the names in exmapc$pheno$Genotype. R/qtl
 # DOES NOT put row names on the data. By default, R/qtl sets the allele codes as
 # AA = 1, BB = 2 for a DH and AA = 1, AB = 2 for a BC.
 exmapc$geno$"1A"$map
-dim(exmapc$geno$"1A"$data)
+exmapc$geno$"1A"$data[1:10,1:5]
 
 # R/qtl provides some quick summary functions for components of the object
 # Summarize the object.
@@ -685,12 +687,12 @@ class(exmapc)
 
 %%% PROBLEMS
 \subsection{Exercises}
-<<qtl_1_work1, eval=TRUE, cache=FALSE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
-# 1. Install and load the required function libraries
+<<qtl_1_work1, eval=TRUE, cache=TRUE, result='asis', background='#F2FFF2', highlight=FALSE>>=
+# 1. Install and load the required libraries.
 
-# 2. Read in exmapC.csv using read.cross
+# 2. Read in exmapC.csv using read.cross.
 
-# 3. How many linkage group does the map have?
+# 3. How many linkage groups does the map have?
 
 # 4. How many markers does the linkage map have?
 
@@ -698,25 +700,25 @@ class(exmapc)
 
 # 6. What is the first row of allele data in the "3B" linkage group?
 @
-<<qtl_1_work2, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>=
+<<qtl_1_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfFCEA', highlight=FALSE>>=
 # 7. What is the name of the last individual in the linkage map?
 @
 
-<<qtl_1_work3, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FFDDDD', highlight=FALSE>>=
+<<qtl_1_work3, eval=TRUE, cache=TRUE, result='asis', background='#FFEFEF', highlight=FALSE>>=
 # 8. Extract the lengths of each of the linkage groups in a vector. (Hint: use sapply())
 
 # 9. Extract the name of the first marker in each linkage group in a vector. (Hint: use sapply())
 
 # 10. Extract the seventh and eight marker from linkage group 1B?
 
-# 11. How many recombinations have occured between these markers?
+# 11. How many recombinations have occurred between these markers?
 
 # 12. How many missing values does each marker have in the "7A" linkage group?
 @
 %%% SOLUTIONS
 \iftrainermanual
 \subsection{Trainer solutions}
-<<qtl_1_soln, eval=FALSE, cache=FALSE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
+<<qtl_1_soln, eval=FALSE, cache=TRUE, result='asis', background='#EEFFFF', highlight=FALSE>>=
 # 1. Install and load the required function libraries
 install.packages("qtl")
 install.packages("ASMap")
@@ -753,19 +755,19 @@ sapply(exmapc$geno, function(x) names(x$map[1]))
 # 10. Extract the seventh and eight marker from linkage group 1B?
 mk <- exmapc$geno$"1B"$data[,7:8]
 
-# 11. How many recombinations have occured between these markers? (Hint: use apply().)
+# 11. How many recombinations have occurred between these markers? (Hint: use apply().)
 sum(abs(apply(mk, 1, diff), na.rm = TRUE))
 
 # 12. How many missing values does each marker have in the "7A" linkage group? (Hint: use apply().)
 apply(exmapc$geno$"7A"$data, 2, function(x) length(x[is.na(x)]))
 @
-
+\fi
 \section{Map interrogation and modification tools}
 
-R/qtl and R/ASmap provide users with a suite of functions to
+R/qtl and R/ASMap provide users with a suite of functions to
 interrogate and modify their linkage maps.
 
-<<qtl_2, eval=TRUE, cache=FALSE, result='asis',warning=FALSE>>=
+<<qtl_2, eval=TRUE, cache=TRUE, result='asis',warning=FALSE>>=
 
 ######### Subsetting by linkage groups (i.e. removing chromosomes from linkage map)
 
@@ -820,10 +822,10 @@ find.markerpos(exmapc, c("1A.m.1","2A.m.7"))
 
 # breaking linkage groups (ASMap function, see ?breakCross)
 exmapb <- breakCross(exmapc, split = list("1A" = "1A.m.4"))
-nmar(exmaps)
+nmar(exmapb)
 
 # merging linkage groups (ASMap function, see ?mergeCross)
-exmapm <- mergeCross(exmapb, merge = list("2D" = c("2D1","2D2")))
+exmapm <- mergeCross(exmapc, merge = list("2D" = c("2D1","2D2")))
 nmar(exmapm)
 
 # order linkage groups (uses mixedorder() from library gtools)
@@ -832,7 +834,7 @@ exmapc$geno <- exmapc$geno[mixedorder(names(exmapc$geno))]
 
 %%% PROBLEMS
 \subsection{Exercises}
-<<qtl_2_work1, eval=TRUE, cache=FALSE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
+<<qtl_2_work1, eval=TRUE, cache=TRUE, result='asis', background='#F2FFF2', highlight=FALSE>>=
 
 # 1. Create a new map that contains only marker data for the 7* chromosomes.
 
@@ -845,13 +847,13 @@ exmapc$geno <- exmapc$geno[mixedorder(names(exmapc$geno))]
 # 5. Move a marker from 7D to a new linkage group 7D1. What do you notice?
 @
 
-<<qtl_2_work2, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>=
+<<qtl_2_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfFCEA', highlight=FALSE>>=
 
 # 6. Subset the linkage map by removing linkage groups with less than 10 markers.
 
 # 7. Extract all the map elements for the linkage groups with less than 10 markers
 
-# 8. Merge the 1B1 amd 1B2 linkage groups together.
+# 8. Merge the 1B1 and 1B2 linkage groups together.
 
 # 9. Break the linkage group 3A at the 20th marker.
 @
@@ -859,7 +861,7 @@ exmapc$geno <- exmapc$geno[mixedorder(names(exmapc$geno))]
 %%% SOLUTIONS
 \iftrainermanual
 \subsection{Trainer solutions}
-<<qtl_2_soln, eval=FALSE, cache=FALSE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
+<<qtl_2_soln, eval=FALSE, cache=TRUE, result='asis', background='#EEFFFF', highlight=FALSE>>=
 
 # 1. Create a new map that contains only marker data for the 7* chromosomes.
 exmaps <- subset(exmapc, chr = c("7A","7B","7D"))
@@ -888,7 +890,7 @@ exmaps <- subset(exmapc, chr = names(exmapc$geno)[nmar(exmapc) > 9])
 exmaps <- subset(exmapc, chr = names(exmapc$geno)[nmar(exmapc) < 10])
 pull.map(exmaps)
 
-# 8. Merge the 1B1 amd 1B2 linkage groups together.
+# 8. Merge the 1B1 and 1B2 linkage groups together.
 exmapm <- mergeCross(exmapc, merge = list("1B" = c("1B1","1B2")))
 nmar(exmapm)
 pull.map(exmapm)[["1B"]]
@@ -897,24 +899,23 @@ pull.map(exmapm)[["1B"]]
 exmapb <- breakCross(exmapc, split = list("3A" = "3A.m.20"), suffix = list("3A" = c("3A1","3A2")))
 nmar(exmapb)
 pull.map(exmapb)[c("3A1","3A2")]
-
 @
-
+\fi
 \section{Pre-map construction diagnostics}
 \label{sec:pre}
 
 One of the most important aspects of linkage map construction is
-being able to effciently assess and diagnose potential problems
+being able to efficiently assess and diagnose potential problems
 associated with your marker data. Some problems can be identified before the
 linkage map is constructed and some may require checking after construction is
 complete.
 
 In the age of high-throughput technology it would seem wise to
-construct your map from the best set of markers you have avalaible. To
+construct your map from the best set of markers you have available. To
 ensure this a basic pre-construction checklist could be
 \begin{enumerate}
   \item Check for monomorphic markers and remove. These markers
-    indicate a genomic region that does not segregate for the
+    indicate a genomic region that does not exhibit allelic variation for the
     population being studied.
   \item Check for markers with large numbers of missing values and
     remove. These markers will struggle to map to unique locations on the
@@ -925,7 +926,7 @@ ensure this a basic pre-construction checklist could be
   \item Place co-locating markers aside.
 \end{enumerate}
 
-<<qtl_3, eval=TRUE, cache=FALSE, result='asis',out.width ="15.5cm",out.height="11cm",fig.width = 12,fig.height = 9,fig.align = "center",warning=FALSE>>=
+<<qtl_3, eval=TRUE, cache=TRUE, result='asis',out.width ="15.5cm",out.height="11cm",fig.width = 12,fig.height = 9,fig.align = "center",warning=FALSE>>=
 
 # read in unconstructed map
 exmapu <- read.cross(file = "exmapU.csv", format = "csvr", genotypes = c("AA", "BB"),
@@ -940,7 +941,7 @@ plot.missing(exmapu)
 profileMark(exmapu, stat.type = c("seg.dist","prop","miss"), layout = c(1,4), type = "l", crit.val = "bonf")
 
 # The plot annotates markers that have significant segregation distortion and also
-# highlights markers with large amounts of miissing values. You can remove them by dropping
+# highlights markers with large amounts of missing values. You can remove them by dropping
 # the markers. First calculate statistics for each marker.
 sm <- statMark(exmapu, stat.type = "marker")
 
@@ -950,7 +951,7 @@ miss.markers
 exmaps <- drop.markers(exmapu, miss.markers)
 
 # drop distorted markers
-crit.val <- -log10(0.05/totmar(exmapu))
+crit.val <- -log10(0.05/totmar(exmapu)) # bonferroni adjusted p-value
 dist.markers <- markernames(exmapu)[sm$marker$neglog10P > crit.val]
 dist.markers
 exmaps <- drop.markers(exmaps, dist.markers)
@@ -960,18 +961,19 @@ profileMark(exmaps, stat.type = c("seg.dist","prop","miss"), layout = c(1,4), ty
 
 # R/ASMap has a function to pull co-located markers from a map,
 # keeping their connections (see ?pullCross)
-exmapu.p <- pullCross(exmaps, type = "co.located")
-exmapu.p$co.located$table
+exmapu <- pullCross(exmaps, type = "co.located")
+exmapu$co.located$table
 @
 
-<<qtl_3_work1, eval=TRUE, cache=FALSE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
+\subsection{Exercises}
+<<qtl_3_work1, eval=TRUE, cache=TRUE, result='asis', background='#F2FFF2', highlight=FALSE>>=
 
 # 1. Read in the unconstructed map and follow the commands from this section.
 @
 
 \iftrainermanual
 \subsection{Trainer solutions}
-<<qtl_3_soln, eval=FALSE, cache=FALSE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
+<<qtl_3_soln, eval=FALSE, cache=TRUE, result='asis', background='#EEFFFF', highlight=FALSE>>=
 
 # 1. Read in unconstructed map and follow the commands from this section.
 exmapu <- read.cross(file = "exmapU.csv", format = "csvr", genotypes = c("AA", "BB"),
@@ -989,7 +991,7 @@ exmaps <- drop.markers(exmaps, dist.markers)
 exmapu <- pullCross(exmaps, type = "co.located")
 exmapu$co.located$table
 @
-
+\fi
 \section{Map construction using R/ASMap}
 
 The R/qtl package contains a suite of functions that can be used for
@@ -1008,13 +1010,13 @@ maximum of 8 positions from their original position. This suggests that
 rippling may need to be performed several times to ensure an optimal
 order of the markers is found for the linkage group. Users can check this for themselves by
 using the function \texttt{ripple()} with window 8 on the linkage group 5A of the
-constructed map ``exmap''.
+constructed map ``exmapc''.
 
 R/ASMap was written to completely circumvent the computational issues described
 above. The package contains two extremely efficient linkage map construction functions,
 \texttt{mstmap.data.frame()} and \texttt{mstmap.cross()}, that unlock the
-MSTmap source code (a full donwload of the source code and more
-infomation on MSTmap can be found at
+MSTmap source code (a full download of the source code and more
+information on MSTmap can be found at
 \url{http://alumni.cs.ucr.edu/~yonghui/mstmap.html}) and make it
 available in R. In this workshop we will focus on
 \texttt{mstmap.cross()} which contains a comprehensive set of
@@ -1022,10 +1024,10 @@ arguments that allow users to completely construct, re-construct an
 R/qtl cross object. A more detailed description of the arguments
 can be found by accessing the help file \texttt{?mstmap.cross}.
 
-<<qtl_4, eval=TRUE, echo=TRUE, cache=FALSE, result='asis'>>=
+<<qtl_4, eval=TRUE, echo=TRUE, cache=TRUE, result='asis'>>=
 args(mstmap.cross)
 @
-A short description of the most conmmonly required arguments is given
+A short description of the most commonly required arguments is given
 below.
 \begin{enumerate}
 \item{\texttt{object}: the R/qtl cross object.}
@@ -1033,22 +1035,22 @@ below.
     constructing the linkage map.}
 \item{\texttt{id}: the column identifier for the genotype names in the
     \texttt{pheno} element of the R/qtl object.}
-\item{\texttt{bychr}: logical value determining whether constrcution
+\item{\texttt{bychr}: logical value determining whether construction
     should occur within linkage groups}
 \item{\texttt{anchor}: logical value determining whether linkage
     group orientations should be attempted to be preserved.}
-\item{\texttt{dist.function}: distance function to be used in
+\item{\texttt{dist.fun}: distance function to be used in
     the calculation of the genetic distances}
 \item{\texttt{p.value}: the threshold for determining linkage between
     distinct groups}
-\item{\texttt{mv.est}: logial value determining whether missing values
+\item{\texttt{mv.est}: logical value determining whether missing values
   are imputed as the algorithm proceeds}
 \item{\texttt{detectBadData}: logical value determining whether
-    genoptyping errors are detected and set to missing as the
+    genotyping errors are detected and set to missing as the
     algorithm proceeds}
 \end{enumerate}
 
-The function is higly flexible and allows you to construct or
+The function is highly flexible and allows you to construct or
 reconstruct your object in almost every conceivable way. One of the
 most important arguments of the function is the numerical
 \texttt{p.value} that is used to determine the threshold for markers
@@ -1073,38 +1075,38 @@ linkage group clusters then an appropriate LOD score would be 14 or a
 \end{figure}
 
 
-<<qtl_41, eval=FALSE, echo=TRUE, cache=FALSE, result='asis'>>=
-
+<<qtl_41, eval=TRUE, cache=TRUE, result='asis',warning=FALSE>>=
 # Reconstruct the object from scratch! Setting bychr = FALSE bulks already
 # formed linkage groups together and reconstructs.
-map1 <- mstmap(exmapc, bychr = FALSE, dist.fun = "kosambi", trace = FALSE)
+map1 <- mstmap(exmapc, bychr = FALSE, dist.fun = "kosambi", trace = TRUE)
 nmar(map1)
 
 # Reconstruct the first three linkage groups.
-map2 <- mstmap(exmapc, chr = names(exmap$geno)[1:3], bychr = FALSE, dist.fun = "kosambi", trace = FALSE)
+map2 <- mstmap(exmapc, chr = names(exmapc$geno)[1:3], bychr = FALSE, dist.fun = "kosambi", trace = TRUE)
 nmar(map2)
 
 # Reconstruct individual linkage groups, breaking linkage groups if necessary
-map3 <- mstmap(exmapc, bychr = TRUE, dist.fun = "kosambi", trace = FALSE)
+map3 <- mstmap(exmapc, bychr = TRUE, dist.fun = "kosambi", trace = TRUE)
 nmar(map3)
 
 # Optimally order markers within linkage groups without breaking linkage groups.
-map4 <- mstmap(exmapc, bychr = TRUE, dist.fun = "kosambi", trace = FALSE, p.value = 2)
+map4 <- mstmap(exmapc, bychr = TRUE, dist.fun = "kosambi", trace = TRUE, p.value = 2)
 nmar(map4)
 pull.map(map4)[["1B1"]]
 
 # Optimally order markers within linkage groups without breaking linkage groups and
 # attempt to preserve orientation of linkage groups
-map5 <- mstmap(exmapc, bychr = TRUE, dist.fun = "kosambi", trace = FALSE, p.value = 2, anchor = TRUE)
+map5 <- mstmap(exmapc, bychr = TRUE, dist.fun = "kosambi", trace = TRUE, p.value = 2, anchor = TRUE)
 pull.map(map5)[["1B1"]]
 @
 
 
 %%% PROBLEMS
 \subsection{Exercises}
-<<qtl_4_work1, eval=TRUE, cache=FALSE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
+<<qtl_4_work1, eval=TRUE, cache=TRUE, result='asis', background='#F2FFF2', highlight=FALSE>>=
 
-# 1. Construct the unconstructed map "exmapu" and extract the linkage group names.
+# 1. Construct the unconstructed map "exmapu" (with missing, distorted and co-located markers removed)
+# and extract the linkage group names.
 
 # 2. Extract the map elements of the newly constructed map. What do you notice?
 
@@ -1114,7 +1116,7 @@ pull.map(map5)[["1B1"]]
 
 @
 
-<<qtl_4_work2, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>=
+<<qtl_4_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfFCEA', highlight=FALSE>>=
 
 # 5. Construct the unconstructed map "exmapu" from scratch with a stricter threshold and extract
 # the map elements. What do you notice?
@@ -1124,7 +1126,7 @@ pull.map(map5)[["1B1"]]
 %%% SOLUTIONS
 \iftrainermanual
 \subsection{Trainer solutions}
-<<qtl_4_soln, eval=FALSE, cache=FALSE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
+<<qtl_4_soln, eval=FALSE, cache=TRUE, result='asis', background='#EEFFFF', highlight=FALSE>>=
 
 # 1. Construct the unconstructed map "exmapu" and extract the linkage group names.
 map1u <- mstmap(exmapu, bychr = FALSE, dist.fun = "kosambi", trace = FALSE)
@@ -1152,7 +1154,7 @@ pull.map(map1us)
 # There are more linkage groups. This is because the threshold for linkage between markers is stricter.
 
 @
-
+\fi
 \section{Constructed map diagnosis}
 
 Post construction diagnosis of your linkage map is very
@@ -1163,7 +1165,8 @@ important. A short checklist of potential things to look for are
   threshold of 200 cM?
 \item Do recombination counts of any genotypes across the linkage map
   significantly exceed the number of expected recombination counts for
-  a genotype given the reference genome?
+  a genotype given the population type and number of chromosomes of
+  the genome being constructed?
 \item Are there any problematic markers or regions of the genome?
 \end{enumerate}
 
@@ -1174,15 +1177,16 @@ linkage groups and the map elements of the constructed object.
 From experience, one of the best indicators of a constructed maps
 quality is the extraction and plotting of the recombination counts for
 each of the genotypes across the complete linkage map (point number 3). Large counts
-compared to an expected count for a genotype given the reference genome indicate
-problematic lines.  There are a myriad of reasons these might exist
+compared to an expected count for a genotype, given the population type
+and genome under construction, indicate problematic lines.
+There are a myriad of reasons these might exist
 including wrong genotyping calls, DNA contamination, unknown population
 structure etc. An increased number of recombinations for a set
 of lines can have a significant impact on the quality of the linkage
 map and this is usually manifested in the increased length of the
 linkage groups. Although it is most likely that deletion is the only method of
 to ensure ongoing linkage map quality, the problematic lines should be
-scrutinised and resolved before continuining with the map construction process.
+scrutinised and the issue resolved before continuing with the map construction process.
 
 Point number 4 is the most difficult map diagnostic. It should be
 noted that problematic markers could influence recombination counts
@@ -1190,14 +1194,14 @@ and double recombinations of genotypes. For this reason, points 3 and
 4 should be checked simultaneously before deletions are
 performed.
 
-<<qtl_5, eval=TRUE, cache=FALSE, result='asis',out.width ="15.5cm",out.height="11cm",fig.width = 12,fig.height = 9,fig.align = "center">>=
+<<qtl_5, eval=TRUE, cache=TRUE, result='asis',out.width ="15.5cm",out.height="11cm",fig.width = 12,fig.height = 9,fig.align = "center">>=
 # R/ASMap contains a function for plotting recombination counts, double recombination counts
 # and missing value counts of each of the genotypes for the constructed linkage map.
 profileGen(exmapc, bychr = FALSE, stat.type = c("xo","dxo","miss"), id = "Genotype",
            lty = 2, pch = 16, layout = c(1,3))
 
 # R/ASMap also has a heat map that shows you how well the markers have clustered and
-# linked together and is great visual guide for problemtic regions of your linkage map.
+# linked together and is great visual guide for problematic regions of your linkage map.
 # It plots the estimated pairwise recombination fraction between markers on the top triangle
 # and the pairwise LOD scores for the test of no linkage between markers on the bottom triangle.
 #(see ?heatMap for more details)
@@ -1209,7 +1213,7 @@ profileMark(exmapc, stat.type = c("erf","lod","recomb","dxo"), layout = c(1,4), 
 @
 
 \subsection{Exercises}
-<<qtl_5_work1, eval=FALSE, cache=FALSE, result='asis', size="large",background='#D7FFD7', highlight=FALSE>>=
+<<qtl_5_work1, eval=FALSE, cache=TRUE, result='asis', background='#F2FFF2', highlight=FALSE>>=
 
 # 1. Redo the commands above but with the newly constructed map "map1u".
 
@@ -1219,18 +1223,17 @@ profileMark(exmapc, stat.type = c("erf","lod","recomb","dxo"), layout = c(1,4), 
 
 @
 
-<<qtl_5_work2, eval=TRUE, cache=FALSE, result='asis', size="large",background='#FfEDD9', highlight=FALSE>>=
+<<qtl_5_work2, eval=TRUE, cache=TRUE, result='asis', background='#FfFCEA', highlight=FALSE>>=
 
-# 4. Remove the genotype that has an unusual high number of recombinations
+# 4. Remove the genotype that has an unusual high number of recombinations.
 
 # 5. Reconstruct the linkage map with this line removed.
 @
 
 \subsection{Trainer solutions}
-<<qtl_5_soln, eval=FALSE, cache=FALSE, result='asis', size="large",background='#DDFFFF', highlight=FALSE>>=
+<<qtl_5_soln, eval=FALSE, cache=TRUE, result='asis', background='#EEFFFF', highlight=FALSE>>=
 
 # 1. Redo the commands above but with the newly constructed map "map1u".
-profileGen(map1u, bychr = FALSE, stat.type = c("xo","dxo","miss"), id = "Genotype", layout = c(1,3))
 profileGen(map1u, bychr = FALSE, stat.type = c("xo","dxo","miss"), id = "Genotype",
            lty = 2, pch = 16, layout = c(1,3))
 heatMap(map1u, lmax = 30)
@@ -1238,13 +1241,13 @@ profileMark(map1u, stat.type = c("erf","lod","recomb","dxo"), layout = c(1,4), t
 pull.map(map1u)
 
 # 2. For this map, subset the heatMap so it only contains the first 6 linkage groups.
-heatMap(map1u, chr = names(map1u)[1:6], lmax = 30)
+heatMap(map1u, chr = names(map1u$geno)[1:6], lmax = 30)
 
 # 3. Profile the constructed map on just L.18. What is unusual about these profiles?
 profileMark(map1u, chr = "L.18", stat.type = c("erf","lod","recomb","dxo"), layout = c(1,4), type = "l")
 
 # There are two markers with 4 double crossovers that occur where there are small numbers of recombination.
-# This would indicate possible problematic markers.
+# This could indicate possible problematic markers.
 
 # 4. Remove the genotype that has an unusual high number of recombinations
 sg <- statGen(map1u, bychr = FALSE, stat.type = "xo")
@@ -1252,11 +1255,20 @@ map1us <- subset(map1u, ind = sg$xo < 45)
 
 # 5. Reconstruct the linkage map with this line removed.
 map1us <- mstmap(map1us, bychr = TRUE, dist.fun = "kosambi", trace = FALSE, anchor = TRUE)
+profileGen(map1us, bychr = FALSE, stat.type = c("xo","dxo","miss"), id = "Genotype",
+           lty = 2, pch = 16, layout = c(1,3))
 @
 
+\section{Wrap-up Part II}
 
-
-
+From this section, we have covered
+\begin{itemize}
+ \item How to read data into R/qtl
+ \item The structure of the R/qtl cross object and how to interrogate/manipulate it
+ \item Pre-diagnosis of your marker data
+ \item Super efficient linkage map construction using R/ASMap
+ \item Post-diagnosis of your constructed linkage map
+\end{itemize}
 
 \section{Appendix}
 \subsection{Installing R and RStudio}
